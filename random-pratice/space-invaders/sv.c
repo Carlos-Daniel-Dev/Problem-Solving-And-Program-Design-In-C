@@ -16,7 +16,8 @@
 
 #define PLAYER_ICON 'A'
 
-void clear_screen() {
+void clear_screen() 
+{
     system(CLEAR_SCREEN);
 }
 
@@ -48,7 +49,8 @@ void print_player(int player_pos_x)
     printf("\n");
 }
 
-void update_screen(int player_pos_x, int score) {
+void update_screen(int player_pos_x, int score) 
+{
     clear_screen();
     
     print_score(score);
@@ -57,7 +59,8 @@ void update_screen(int player_pos_x, int score) {
     
 }
 
-void use_key(char key, int *player_pos_x) {
+void use_key(char key, int *player_pos_x) 
+{
     if (key == 'a' && (*player_pos_x) > 0) {
         (*player_pos_x)--;
     } else if (key == 'd' && (*player_pos_x) < SCREEN_SIZE) {
@@ -65,7 +68,8 @@ void use_key(char key, int *player_pos_x) {
     }
 }
 
-void start_game() {
+void start_game() 
+{
     char key;
     int player_pos_x = SCREEN_SIZE / 2;
     int score = 0;
@@ -77,7 +81,8 @@ void start_game() {
     }
 }
 
-int main() {
+int main() 
+{
     start_game();
     return 0;
 }
