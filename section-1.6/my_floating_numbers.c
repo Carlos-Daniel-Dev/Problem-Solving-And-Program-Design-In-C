@@ -17,7 +17,7 @@ void print_memory(char *memory)
     printf("\n");
 }
 
-void set_byte_on_memory(char *memory, int pos, char byte[]) 
+void set_byte_on_memory(char *memory, int pos, char *byte) 
 {
     int index = pos * 8;
     for (int i = 0; i < 8; i++) 
@@ -36,7 +36,6 @@ unsigned char binaryToByte(const char *binaryString) {
     }
     return byte;
 }
-
 
 unsigned char get_byte_on_memory(char *memory, int pos)
 {
