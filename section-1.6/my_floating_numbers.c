@@ -16,7 +16,6 @@ void print_memory()
     {
         printf("%c", memory[i]);
     }
-
     printf("\n");
 }
 
