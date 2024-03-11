@@ -3,6 +3,9 @@
 
 #define MEMORY_SPACE 128
 
+#define LOWER_MEMORY_ADRESS 0
+#define HIGHER_MEMORY_ADRESS MEMORY_SPACE - 1
+
 // DATA TYPES
 #define INT 0
 #define CHAR 1
@@ -10,9 +13,10 @@
 
 char memory[MEMORY_SPACE];
 
+
 void print_memory() 
 {
-    for (int i = 0; i < MEMORY_SPACE; i++) 
+    for (int i = 0; i <= HIGHER_MEMORY_ADRESS; i++) 
     {
         printf("%c", memory[i]);
     }
