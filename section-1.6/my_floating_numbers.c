@@ -20,7 +20,7 @@ void print_memory()
     printf("\n");
 }
 
-void set_byte_on_memory(int pos, char *byte) 
+void set_byte_on_memory(int pos, const char *byte) 
 {
     int index = pos * 8;
     for (int i = 0; i < 8; i++) 
