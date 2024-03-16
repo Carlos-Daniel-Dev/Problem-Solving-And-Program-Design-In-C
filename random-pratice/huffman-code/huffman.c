@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-FILE *getfile(const char *filename) 
+FILE *get_file(const char *filename) 
 {
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
@@ -10,7 +10,7 @@ FILE *getfile(const char *filename)
     return file;
 }
 
-char *getfiletext(const char *filename)
+char *get_file_text(const char *filename)
 {
 	FILE *file = getfile(filename); 
 
@@ -27,6 +27,7 @@ char *getfiletext(const char *filename)
     fclose(file);
     return content;
 }
+
 
 int main ()
 {
