@@ -3,26 +3,35 @@
 
 #define ASCII_CHARACTERS 256
 
+// Prototypes
+FILE *get_file(const char *filename);
+char *get_file_text(const char *filename);
+int **get_characters_frequency_list(const char *filename);
+void print_frequency_list(int **pairs);
+
 FILE *get_file(const char *filename) 
 {
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
-        perror("Error while open the file");
-        return NULL;
+        perror("Error while opening the file");
     }
     return file;
 }
 
-char *get_file_text(const char *filename)
+char *get_file_text(const char *filename) 
 {
-	FILE *file = get_file(filename); 
+    FILE *file = get_file(filename);
+    if (file == NULL) return NULL;
 
-	fseek(file, 0, SEEK_END);
+    fseek(file, 0, SEEK_END);
     long file_size = ftell(file);
     rewind(file);
 
     char *content = malloc(file_size + 1);
-    if (content == NULL) return NULL;
+    if (content == NULL) {
+        fclose(file);
+        return NULL;
+    }
 
     fread(content, 1, file_size, file);
     content[file_size] = '\0';
@@ -31,43 +40,62 @@ char *get_file_text(const char *filename)
     return content;
 }
 
-int *get_characters_frequency_list(const char *filename)
+int **get_characters_frequency_list(const char *filename) 
 {
     char *text = get_file_text(filename);
     if (text == NULL) return NULL;
 
-    int *list = malloc(sizeof(int) * ASCII_CHARACTERS);
-    if (list == NULL) return NULL;
-
-    for (int i = 0; i < ASCII_CHARACTERS; i++) 
-    {
-        list[i] = 0;
+    int **pairs = malloc(sizeof(int *) * ASCII_CHARACTERS);
+    if (pairs == NULL) {
+        free(text);
+        return NULL;
     }
 
-    for (int i = 0; text[i] != '\0'; i++) 
-    {
-        list[(unsigned char)text[i]]++;
+    for (int i = 0; i < ASCII_CHARACTERS; i++) {
+        pairs[i] = malloc(sizeof(int) * 2);
+        if (pairs[i] == NULL) {
+            for (int j = 0; j < i; j++) {
+                free(pairs[j]);
+            }
+            free(pairs);
+            free(text);
+            return NULL;
+        }
+        pairs[i][0] = i;
+        pairs[i][1] = 0;
+    }
+
+    for (int i = 0; text[i] != '\0'; i++) {
+        pairs[(unsigned char)text[i]][1]++;
     }
 
     free(text);
-
-    return list;
+    return pairs;
 }
 
-void print_frequency_list(int list[])
+void print_frequency_list(int **pairs) 
 {
-    for (int i = 0; i < ASCII_CHARACTERS; i++) 
-    {
-        if (list[i] != 0) {
-            printf("[%c | %d]\n", (char)i, list[i]);
+    for (int i = 0; i < ASCII_CHARACTERS; i++) {
+        if (pairs[i][1] != 0) {
+            printf("[%c | %d]\n", (char)pairs[i][0], pairs[i][1]);
         }
     }
 }
 
-
-int main ()
+int main() 
 {
-	int *list = get_characters_frequency_list("text.txt");
-	print_frequency_list(list);
-	return 1;
+    int **pairs = get_characters_frequency_list("text.txt");
+    if (pairs == NULL) {
+        printf("Failed to get character frequency list.\n");
+        return 1;
+    }
+
+    print_frequency_list(pairs);
+
+    for (int i = 0; i < ASCII_CHARACTERS; i++) {
+        free(pairs[i]);
+    }
+    free(pairs);
+
+    return 0;
 }
