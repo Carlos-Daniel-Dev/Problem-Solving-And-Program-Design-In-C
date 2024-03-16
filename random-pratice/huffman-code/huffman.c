@@ -120,6 +120,24 @@ int **sort_characters_frequency_list(int **list)
     return list;
 }
 
+Node *create_node(int frequency, unsigned char character)
+{
+    Node *new_node = (Node *)malloc(sizeof(Node));
+
+    if (new_node == NULL)
+    {
+        fprintf(stderr, "Error allocating memory for Huffman tree node.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    new_node->frequency = frequency;
+    new_node->character = character;
+    new_node->left = NULL;
+    new_node->right = NULL;
+
+    return new_node;
+}
+
 void free_huffman_tree(Node *root)
 {
     if (root == NULL) return;
@@ -127,6 +145,8 @@ void free_huffman_tree(Node *root)
     free_huffman_tree(root->right);
     free(root);
 }
+
+
 
 int main() 
 {
