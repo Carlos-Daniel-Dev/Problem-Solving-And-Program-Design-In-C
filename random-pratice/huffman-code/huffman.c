@@ -46,10 +46,12 @@ int *get_characters_frequency_list(char const *filename)
 
 void print_frequency_list(int list[])
 {
-	for (int i = 0; i != '\0'; i++)
-	{
-		printf("[%c | %d]\n", (char)i, list[i]);
-	}
+    for (int i = 0; i < ASCII_CHARACTERS; i++) 
+    {
+        if (list[i] != 0) {
+            printf("[%c | %d]\n", (char)i, list[i]);
+        }
+    }
 }
 
 
