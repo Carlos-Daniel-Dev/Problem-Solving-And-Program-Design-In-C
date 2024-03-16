@@ -4,11 +4,14 @@
 #define ASCII_CHARACTERS 256
 
 // Prototypes
+
 FILE *get_file(const char *filename);
 char *get_file_text(const char *filename);
 int **get_characters_frequency_list(const char *filename);
 void print_frequency_list(int **pairs);
-int **sort_characters_frequency_list(int **list) ;
+int **sort_characters_frequency_list(int **list);
+
+
 
 FILE *get_file(const char *filename) 
 {
@@ -108,11 +111,7 @@ int **sort_characters_frequency_list(int **list)
 int main() 
 {
     int **pairs = get_characters_frequency_list("text.txt");
-    if (pairs == NULL) {
-        printf("Failed to get character frequency list.\n");
-        return 1;
-    }
-
+    
     pairs = sort_characters_frequency_list(pairs);
 
     print_frequency_list(pairs);
