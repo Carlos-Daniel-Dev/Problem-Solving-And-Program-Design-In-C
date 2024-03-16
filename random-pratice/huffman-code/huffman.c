@@ -8,6 +8,7 @@ FILE *get_file(const char *filename);
 char *get_file_text(const char *filename);
 int **get_characters_frequency_list(const char *filename);
 void print_frequency_list(int **pairs);
+int **sort_characters_frequency_list(int **list) ;
 
 FILE *get_file(const char *filename) 
 {
