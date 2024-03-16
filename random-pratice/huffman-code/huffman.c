@@ -82,6 +82,28 @@ void print_frequency_list(int **pairs)
     }
 }
 
+int **sort_characters_frequency_list(int **list) 
+{
+    int min = -1;
+    for (int i = 0; i < ASCII_CHARACTERS; i++)
+    {
+        for (int j = 0; j < ASCII_CHARACTERS - 1; j++)
+        {
+            if (list[j][1] > list[j + 1][1])
+            {
+                int temp = list[j][1];
+                list[j][1] = list[j + 1][1];
+                list[j + 1][1] = temp;
+
+                temp = list[j][0];
+                list[j][0] = list[j + 1][0];
+                list[j + 1][0] = temp;
+            }
+        }
+    }
+    return list;
+}
+
 int main() 
 {
     int **pairs = get_characters_frequency_list("text.txt");
@@ -89,6 +111,8 @@ int main()
         printf("Failed to get character frequency list.\n");
         return 1;
     }
+
+    pairs = sort_characters_frequency_list(pairs);
 
     print_frequency_list(pairs);
 
