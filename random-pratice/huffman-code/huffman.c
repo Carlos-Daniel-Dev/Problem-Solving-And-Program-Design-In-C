@@ -111,11 +111,15 @@ int **sort_characters_frequency_list(int **list)
 int main() 
 {
     int **pairs = get_characters_frequency_list("text.txt");
-    
+
     pairs = sort_characters_frequency_list(pairs);
 
     print_frequency_list(pairs);
 
+
+
+
+    // memory free
     for (int i = 0; i < ASCII_CHARACTERS; i++) {
         free(pairs[i]);
     }
