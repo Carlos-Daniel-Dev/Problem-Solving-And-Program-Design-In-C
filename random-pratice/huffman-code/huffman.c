@@ -44,11 +44,18 @@ int *get_characters_frequency_list(char const *filename)
 	return list;
 }
 
-
+void print_frequency_list(int list[])
+{
+	for (int i = 0; i != '\0'; i++)
+	{
+		printf("[%c | %d]\n", (char)i, list[i]);
+	}
+}
 
 
 int main ()
 {
-	
+	int *list = get_characters_frequency_list("text.txt");
+	print_frequency_list(list);
 	return 1;
 }
