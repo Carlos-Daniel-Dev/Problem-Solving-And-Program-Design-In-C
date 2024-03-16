@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-FILE *getfiletext(const char *filename) 
+FILE *getfile(const char *filename) 
 {
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
@@ -12,5 +12,6 @@ FILE *getfiletext(const char *filename)
 
 int main ()
 {
+	getfile("text.txt");
 	return 1;
 }
