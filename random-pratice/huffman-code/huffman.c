@@ -120,6 +120,14 @@ int **sort_characters_frequency_list(int **list)
     return list;
 }
 
+void free_huffman_tree(Node *root)
+{
+    if (root == NULL) return;
+    free_huffman_tree(root->left);
+    free_huffman_tree(root->right);
+    free(root);
+}
+
 int main() 
 {
     int **pairs = get_characters_frequency_list("text.txt");
