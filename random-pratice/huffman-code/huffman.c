@@ -31,17 +31,27 @@ char *get_file_text(const char *filename)
     return content;
 }
 
-int *get_characters_frequency_list(char const *filename)
+int *get_characters_frequency_list(const char *filename)
 {
-	char* text = get_file_text(filename);
-	int static list[ASCII_CHARACTERS];
+    char *text = get_file_text(filename);
+    if (text == NULL) return NULL;
 
-	for (int i = 0; i != '\0'; i++)
-	{
-		list[text[i]]++;
-	}
+    int *list = malloc(sizeof(int) * ASCII_CHARACTERS);
+    if (list == NULL) return NULL;
 
-	return list;
+    for (int i = 0; i < ASCII_CHARACTERS; i++) 
+    {
+        list[i] = 0;
+    }
+
+    for (int i = 0; text[i] != '\0'; i++) 
+    {
+        list[(unsigned char)text[i]]++;
+    }
+
+    free(text);
+
+    return list;
 }
 
 void print_frequency_list(int list[])
