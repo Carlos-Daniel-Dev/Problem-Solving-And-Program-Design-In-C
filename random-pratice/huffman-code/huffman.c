@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#define ASCII_CHARACTERS 256
+
 FILE *get_file(const char *filename) 
 {
     FILE *file = fopen(filename, "r");
@@ -12,7 +15,7 @@ FILE *get_file(const char *filename)
 
 char *get_file_text(const char *filename)
 {
-	FILE *file = getfile(filename); 
+	FILE *file = get_file(filename); 
 
 	fseek(file, 0, SEEK_END);
     long file_size = ftell(file);
@@ -28,9 +31,24 @@ char *get_file_text(const char *filename)
     return content;
 }
 
+int *get_characters_frequency_list(char const *filename)
+{
+	char* text = get_file_text(filename);
+	int static list[ASCII_CHARACTERS];
+
+	for (int i = 0; i != '\0'; i++)
+	{
+		list[text[i]]++;
+	}
+
+	return list;
+}
+
+
+
 
 int main ()
 {
-	printf("%s\n", getfiletext("text.txt"));
+	
 	return 1;
 }
