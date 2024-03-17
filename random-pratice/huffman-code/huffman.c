@@ -6,7 +6,8 @@
 
 #define ASCII_CHARACTERS 256
 
-FILE *get_file(const char *filename) {
+FILE *get_file(const char *filename) 
+{
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
         perror("Error while opening the file");
@@ -14,7 +15,8 @@ FILE *get_file(const char *filename) {
     return file;
 }
 
-char *get_file_text(const char *filename) {
+char *get_file_text(const char *filename) 
+{
     FILE *file = get_file(filename);
     if (file == NULL) return NULL;
 
@@ -35,7 +37,8 @@ char *get_file_text(const char *filename) {
     return content;
 }
 
-int **get_characters_frequency_list(const char *filename) {
+int **get_characters_frequency_list(const char *filename) 
+{
     char *text = get_file_text(filename);
     if (text == NULL) return NULL;
 
@@ -67,7 +70,8 @@ int **get_characters_frequency_list(const char *filename) {
     return pairs;
 }
 
-int **sort_characters_frequency_list(int **list) {
+int **sort_characters_frequency_list(int **list) 
+{
     for (int i = 0; i < ASCII_CHARACTERS; i++) {
         for (int j = 0; j < ASCII_CHARACTERS - 1; j++) {
             if (list[j][1] > list[j + 1][1]) {
@@ -84,7 +88,8 @@ int **sort_characters_frequency_list(int **list) {
     return list;
 }
 
-Node *create_node(int frequency, unsigned char character) {
+Node *create_node(int frequency, unsigned char character) 
+{
     Node *new_node = (Node *)malloc(sizeof(Node));
     if (new_node == NULL) {
         fprintf(stderr, "Error allocating memory for Huffman tree node.\n");
@@ -104,7 +109,8 @@ void free_huffman_tree(Node *root) {
     free(root);
 }
 
-void find_min_frequencies(Node **nodes, int size, int *min1, int *min2) {
+void find_min_frequencies(Node **nodes, int size, int *min1, int *min2) 
+{
     *min1 = -1;
     *min2 = -1;
     for (int i = 0; i < size; i++) {
@@ -119,7 +125,8 @@ void find_min_frequencies(Node **nodes, int size, int *min1, int *min2) {
     }
 }
 
-Node *build_huffman_tree(int **frequency_list) {
+Node *build_huffman_tree(int **frequency_list) 
+{
     Node **nodes = (Node **)malloc(ASCII_CHARACTERS * sizeof(Node *));
     if (nodes == NULL) {
         fprintf(stderr, "Error allocating memory for node list.\n");
@@ -161,7 +168,7 @@ int main()
 {
     int **frequency_list = get_characters_frequency_list("text.txt");
     frequency_list = sort_characters_frequency_list(frequency_list);
-    
+
     Node *root = build_huffman_tree(frequency_list);
     write_huffman_tree_to_json_file(root);
     

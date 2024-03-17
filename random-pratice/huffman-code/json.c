@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void write_node_to_json(FILE *file, Node *node, int indent_level) {
+void write_node_to_json(FILE *file, Node *node, int indent_level) 
+{
     if (node == NULL) {
         fprintf(file, "null");
         return;
@@ -18,7 +19,8 @@ void write_node_to_json(FILE *file, Node *node, int indent_level) {
     fprintf(file, "\n%*s}", (indent_level - 1) * 2, "");
 }
 
-void write_huffman_tree_to_json_file(Node *root) {
+void write_huffman_tree_to_json_file(Node *root) 
+{
 
     FILE *file = fopen("huffman.json", "w");
     if (file == NULL) {
