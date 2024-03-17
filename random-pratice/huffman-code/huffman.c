@@ -225,20 +225,29 @@ void print_huffman_tree(Node *root) {
 
 int main() 
 {
-    int **pairs = get_characters_frequency_list("text.txt");
-
-    pairs = sort_characters_frequency_list(pairs);
-
-    print_frequency_list(pairs);
-
-
-
-
-    // memory free
+    // Sample frequency list (replace with your actual frequency list)
+    int **frequency_list = malloc(sizeof(int *) * ASCII_CHARACTERS);
     for (int i = 0; i < ASCII_CHARACTERS; i++) {
-        free(pairs[i]);
+        frequency_list[i] = malloc(sizeof(int) * 2);
+        frequency_list[i][0] = i; // Character
+        frequency_list[i][1] = rand() % 100; // Random frequency (replace with actual frequencies)
     }
-    free(pairs);
+
+    // Build the Huffman tree
+    Node *root = build_huffman_tree(frequency_list);
+
+    // Print the Huffman tree
+    printf("Huffman Tree:\n");
+    print_huffman_tree(root);
+
+    // Free memory of the Huffman tree
+    free_huffman_tree(root);
+
+    // Free memory of the frequency list
+    for (int i = 0; i < ASCII_CHARACTERS; i++) {
+        free(frequency_list[i]);
+    }
+    free(frequency_list);
 
     return 0;
 }
