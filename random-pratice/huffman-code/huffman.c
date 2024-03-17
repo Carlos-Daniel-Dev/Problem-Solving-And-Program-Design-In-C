@@ -6,6 +6,8 @@
 
 #define ASCII_CHARACTERS 256
 
+
+// ================== FILE FUNCTIONS 
 FILE *get_file(const char *filename) 
 {
     FILE *file = fopen(filename, "r");
@@ -36,6 +38,8 @@ char *get_file_text(const char *filename)
     fclose(file);
     return content;
 }
+
+// ================= FREQUENCY LIST FUNCTIONS
 
 int **get_characters_frequency_list(const char *filename) 
 {
@@ -87,6 +91,8 @@ int **sort_characters_frequency_list(int **list)
     }
     return list;
 }
+
+// ========================= HUFFMAN TREE FUNCTIONS
 
 Node *create_node(int frequency, unsigned char character, Node *left, Node *right) 
 {
@@ -238,6 +244,11 @@ void find_min_frequencies(Node **nodes, int size, int *min1, int *min2)
 //     free(nodes);
 //     return root;
 // }
+
+
+// ====================== FUNCTIONS TO SAVE COMPRESSED TEXTS
+
+
 
 int main() 
 {
