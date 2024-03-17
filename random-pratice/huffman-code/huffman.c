@@ -161,8 +161,13 @@ int main()
 {
     int **frequency_list = get_characters_frequency_list("text.txt");
     frequency_list = sort_characters_frequency_list(frequency_list);
+    
     Node *root = build_huffman_tree(frequency_list);
     write_huffman_tree_to_json_file(root);
+    
+
+
+    // FREE
     free_huffman_tree(root);
     for (int i = 0; i < ASCII_CHARACTERS; i++) {
         free(frequency_list[i]);
