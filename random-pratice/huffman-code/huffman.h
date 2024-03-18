@@ -15,3 +15,5 @@ Node *create_node(int frequency, unsigned char character, Node *left, Node *righ
 Node *build_static_english_huffman_tree();
 // Node *build_huffman_tree(int **frequency_list);
 void print_huffman_tree(Node *root);
+
+char *find_char_in_huffman_tree(const char *character, Node *root);
