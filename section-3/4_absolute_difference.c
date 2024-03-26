@@ -3,7 +3,7 @@
 *
 * Instructor: Book
 *
-* Description: computes the weight of a specified quantity of flat washers
+* Description: Calculate the absolute difference beetwen two integers
 * 
 */
 
